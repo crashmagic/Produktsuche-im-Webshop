@@ -1,0 +1,61 @@
+<h1>Produktsuche nach Kategorie</h1>
+<label for="kategorie">Kategorie auswählen:</label>
+<select id="kategorie">
+
+    <option value="1">Datenspeicher</option>
+    <option value="2">Anzeigegeräte</option>
+    <option value="3">Kameras</option>
+    <option value="4">Drucker</option>
+</select>
+<button onclick="sucheProdukte()">Suchen</button>
+
+<div id="ergebnisse">
+    <!-- Hier werden die Suchergebnisse angezeigt -->
+</div>
+
+<script>
+    function sucheProdukte() {
+        const selectedKategorieId = document.getElementById('kategorie').value;
+        const ergebnisseDiv = document.getElementById('ergebnisse');
+
+
+    }
+</script>
+@crashmagic crashmagic added this to Komplexe Übung – PR 3 (Produktsuche im Webshop) 3 days ago
+@crashmagic crashmagic closed this as completed 3 days ago
+@crashmagic crashmagic reopened this 3 days ago
+@github-project-automation github-project-automation bot moved this to Done in Komplexe Übung – PR 3 (Produktsuche im Webshop) 3 days ago
+@crashmagic crashmagic closed this as completed 3 days ago
+@crashmagic crashmagic reopened this 3 days ago
+@crashmagic crashmagic closed this as completed 3 days ago
+@crashmagic
+Author
+crashmagic commented 3 days ago
+function sucheProdukte() {
+const selectedKategorieId = document.getElementById('kategorie').value;
+const ergebnisseDiv = document.getElementById('ergebnisse');
+
+// Datenbank mit Produkten
+const produktDatenbank = [
+{ id: '213jido12', name: 'USB-C-Stick 128GB', preis: 29.99 , kategorieId: '1'},
+{ id: '12ocdnkl5', name: 'USB-Festplatte 1TB', preis: 99.99   , kategorieId: '1'},
+{ id: '123mk89d', name: 'Fernseher OLED 55 Zoll', preis:     599.98 , kategorieId: '2'},
+{ id: '89dsahui029', name: 'TFT-Display 55 Zoll', preis: 349.00 , kategorieId: '2'},
+{ id: '83bdsan00', name: 'Digitalkamera 50 Megapixel', preis: 129.49 , kategorieId: '3'},
+{ id: '034ndjakl123', name: 'Digitalkamera 45 Megapixel', preis: 109.49 , kategorieId: '3'},
+        ];
+
+// Suchergebnisse filtern
+const ergebnisse = produktDatenbank.filter(produkt => produkt.kategorieId === selectedKategorieId);
+
+// Ergebnisse anzeigen
+ergebnisseDiv.innerHTML = '';
+if (ergebnisse.length > 0) {
+    ergebnisseDiv.innerHTML = `<p>${ergebnisse.length} Produkte gefunden:</p>`;
+    ergebnisse.forEach(produkt => {
+        ergebnisseDiv.innerHTML += `<p>${produkt.name}</p>`;
+    });
+} else {
+    ergebnisseDiv.innerHTML = 'Keine Produkte in dieser Kategorie gefunden.';
+}
+}
