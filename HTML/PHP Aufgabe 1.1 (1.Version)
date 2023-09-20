@@ -1,0 +1,66 @@
+<input type="text" id="suchbegriff" placeholder="Suchbegriff eingeben">
+<button onclick="sucheProdukte()">Suchen</button>
+
+<section id="ergebnisse">
+    <!-- Hier werden die Suchergebnisse angezeigt -->
+     <?php
+$servername = "mysqlserver080923.database.windows.net"; // Hostname
+$username = "hfh"; // Benutzername
+$password = "f5h743fc&!"; // Passwort
+$database = "mySampleDatabase"; // Datenbankname
+
+// Verbindung zur Datenbank herstellen
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+// Überprüfen, ob die Verbindung erfolgreich hergestellt wurde
+if (!$conn) {
+die("Verbindung fehlgeschlagen: " . mysqli_connect_error());
+}
+
+?>
+
+</section>
+
+<script>
+    function sucheProdukte() {
+        const suchbegriff = document.getElementById('suchbegriff').value.toLowerCase();
+      <!-- mit getElementById wird der DOM nach passenden Suchbegriffen durchsucht, durch .value.toLowerCase() wird die Eingabe in Kleinbuchstaben umgewandelt ohne den Inhalt zu verändern.  -->
+
+        const ergebnisseDiv = document.getElementById('ergebnisse');
+       <!-- hier werden die von der Funktion getElementById in der Variablen ergebnisseDiv zwischengespreicherten gefundenen Ergebnisse an die Variable ergebnisse übergeben.  -->
+// Produkt-Datenbank
+// const produktDatenbank = [
+// { id: '213jido12', name: 'USB-C-Stick 128GB', preis: 29.99 },
+// { id: '12ocdnkl5', name: 'USB-Festplatte 1TB', preis: 99.99 },
+// { id: '123mk89d', name: 'Fernseher OLED 55 Zoll', preis: 599.98 },
+// { id: '89dsahui029', name: 'TFT-Display 55 Zoll', preis: 349.00 },
+// { id: '83bdsan00', name: 'Digitalkamera 50 Megapixel', preis: 129.49 },
+// { id: '034ndjakl123', name: 'Digitalkamera 45 Megapixel', preis: 109.49 },
+// ];
+
+//
+
+                  // Suchergebnisse filtern
+        const ergebnisse = mySampleDatabase.dbo.Produkte.filter(produkt => produkt.name.toLowerCase().includes(suchbegriff));
+        // Ergebnisse anzeigen
+      
+
+        if (ergebnisse.length > 0) {
+          <!-- wenn ergebnisse nicht leer ist wird diese Bedingung ausgeführt. -->
+            ergebnisseDiv.innerHTML = 
+<p>${ergebnisse.length} Produkte gefunden:</p>;
+
+ergebnisse.forEach(produkt => {
+ergebnisseDiv.innerHTML += <p>${produkt.name} - ${produkt.preis} €</p>;
+
+});
+} else {
+ergebnisseDiv.innerHTML = 'Keine Produkte gefunden.';
+
+        }
+    }
+    
+
+
+    }
+</script>
